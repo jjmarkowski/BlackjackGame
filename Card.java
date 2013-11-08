@@ -1,13 +1,24 @@
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class Card {
 	
 	private int number;
 	private String suit;
 	private String name;
+	private Image image;
 
 	public Card(int number, String suit) {
 		setNumber(number);
 		setSuit(suit);
 		setName();
+		this.image = Card.loadImage(name);
 	}
 
 	public void setNumber(int number) {
@@ -58,5 +69,25 @@ public class Card {
 
 	public String getName() {
 		return name;
+	}
+
+	private static Image loadImage(String name) {
+		String path = null;
+		Image image = null;
+
+		try {
+			path = "images" + File.separator + name + ".png";
+			//File file = new File(path);
+			image = ImageIO.read(new File(path));
+		} catch(IOException e) {
+			System.out.println("Could not load image at path" + path);
+			System.exit(1);
+		}
+
+		return image;
+	}
+
+	public void draw(Graphics g, Rectangle r) {
+		g.drawImage(image, r.x, r.y, r.width, r.height, null);
 	}
 }
