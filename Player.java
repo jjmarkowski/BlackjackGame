@@ -10,7 +10,15 @@ public class Player {
 	}
 
 	public void bet(double bet) {
+		betAmount = bet;
+	}
 
+	public double betReturn(String x){
+		if (x == "Win") {
+			balance = betAmount;
+		} else {
+			balance -+ betAmount;
+		}
 	}
 
 	public int handValue() {
