@@ -1,41 +1,17 @@
 public class Player {
 
-	private Hand player;
-	private double balance;
-	private double betAmount;
+	private Hand hand;
 
-	public Player(double balance) {
-		this.balance = balance;
-		player = new Hand();
-	}
-
-	public void bet(double bet) {
-		betAmount = bet;
-	}
-
-	public double betReturn(String x){
-		if (x == "Win") {
-			balance = betAmount;
-		} else {
-			balance -+ betAmount;
-		}
-	}
-
-	public int handValue() {
-		return player.handValue();
+	public Player() {
+		hand = new Hand();
 	}
 
 	public void addCard(Card cardDrawn) {
-		player.addCard(cardDrawn);
+		hand.addCard(cardDrawn);
 	}
 
-	public void printHand() {
-		player.printHand();
+	public int handValue() {
+		return hand.handValue();
 	}
-
-	public double getBalance() {
-		return balance;
-	}
-
 
 }
