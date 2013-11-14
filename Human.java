@@ -13,7 +13,7 @@ public class Human extends Player {
 	}
 
 	public void betReturn(int x) {
-		if (x=1) {
+		if (x==1) {
 			balance += bet;
 		} else {
 			balance -= bet;

@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import javax.swing.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class Card {
 		setNumber(number);
 		setSuit(suit);
 		setName();
-		this.image = Card.loadImage(name);
+		this.image = loadImage(name);
 	}
 
 	public void setNumber(int number) {
@@ -71,7 +72,7 @@ public class Card {
 		return name;
 	}
 
-	private static Image loadImage(String name) {
+	public Image loadImage(String name) {
 		String path = null;
 		Image image = null;
 
@@ -85,6 +86,10 @@ public class Card {
 		}
 
 		return image;
+	}
+
+	public ImageIcon returnImageIcon() {
+		return new ImageIcon("images" + File.separator + this.name + ".png");
 	}
 
 	public void draw(Graphics g, Rectangle r) {
