@@ -14,4 +14,8 @@ public class Player {
 		return hand.handValue();
 	}
 
+	public void handPanel() {
+		
+	}
+
 }

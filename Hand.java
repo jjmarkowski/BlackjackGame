@@ -1,6 +1,12 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+import javax.swing.*;
+
 public class Hand {
 
 	private Card[] hand;
+	
 	//number of cards in hand
 	private int currentCardAmount;
 	private int handValue;
@@ -42,13 +48,5 @@ public class Hand {
 		}
 		return handValue;
 	}
-
-	// public void printHand() {
-	// 	for (int i=0; i<currentCardAmount; i++) {
-	// 		System.out.print(hand[i].getNumber() + "-" + hand[i].getSuit() + " ");
-	// 	}
-	// 	System.out.println();
-	// }
-
 	
 }

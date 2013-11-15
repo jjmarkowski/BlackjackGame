@@ -22,6 +22,10 @@ public class Card {
 		this.image = loadImage(name);
 	}
 
+	public Card() {
+		
+	}
+
 	public void setNumber(int number) {
 		this.number = number;
 	}

@@ -1,45 +1,45 @@
 import java.awt.*;
-import java.applet.*;
 import java.awt.event.*;
+import java.applet.*;
 import javax.swing.*;
 
-public class GameApplet extends JApplet implements ActionListener {
-//public class GameApplet extends Applet {
+public class GameApplet extends Applet implements ActionListener {
 
-	private Deck deckUnshuffle;
-	private Deck deckShuffle;
-	private JPanel panel = new JPanel();
+	private Deck deck;
+	private JPanel playerInterationPanel = new JPanel();
+	private JButton stayButton = new JButton("Stay");
+	private JButton hitButton = new JButton("Hit");
+
+	private JPanel humanHandPanel = new JPanel();
+
+	//private JPanel panel = new JPanel();
 
 	public void init() {
-		deckUnshuffle = new Deck("Unshuffle");
-		Card cardDrawn = deckUnshuffle.drawCard();
 
-		this.setLayout(new GridLayout(2, 1));
+		deck = new Deck();
 
-		panel.setLayout(new FlowLayout());
-		JLabel label = new JLabel(cardDrawn.returnImageIcon());
-		panel.add(label);
-		cardDrawn = deckUnshuffle.drawCard();
-		JLabel label2 = new JLabel(cardDrawn.returnImageIcon());
-		panel.add(label2);
+		this.setLayout(new GridLayout(0, 1));
 
-		this.add(panel);
+		playerInterationPanel.setLayout(new FlowLayout());
+		stayButton.addActionListener(this);
+		stayButton.setActionCommand("Stay");
+		playerInterationPanel.add(stayButton);
+		hitButton.addActionListener(this);
+		hitButton.setActionCommand("Hit");
+		playerInterationPanel.add(hitButton);
 
-		// deckUnshuffle = new Deck("Unshuffle");
-		// deckShuffle = new Deck();
-		// Card cardDrawn = deckUnshuffle.drawCard();
+		this.add(playerInterationPanel);
 
-		// JLabel label = new JLabel("Hello");
+		humanHandPanel.setLayout(new FlowLayout());
+		Card cardDrawn = deck.drawCard();
+		JLabel card1 = new JLabel(cardDrawn.returnImageIcon());
+		humanHandPanel.add(card1);
+		cardDrawn = deck.drawCard();
+		JLabel card2 = new JLabel(cardDrawn.returnImageIcon());
+		humanHandPanel.add(card2);
 
-		// JPanel down = new JPanel();
-		// down.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
-		// down.add(label);
+		this.add(humanHandPanel);
 
-		// this.add(panel);
-
-				
-		// deckUnshuffle = new Deck("Unshuffle");
-		// deckShuffle = new Deck();
 
 	}
 
@@ -66,13 +66,17 @@ public class GameApplet extends JApplet implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// if (e.getActionCommand().equals("Click Me")) {
-		// 	if (label.getText().equals("Hello")) {
-		// 		label.setText("Goodbye");
-		// 	}else {
-		// 		label.setText("Hello");
-		// 	}
-		// }
+		if (e.getActionCommand().equals("Stay")) {
+			System.out.println("Stay");
+			//validate();
+			repaint();
+		} else if (e.getActionCommand().equals("Hit")) {
+			Card cardDrawn = deck.drawCard();
+			JLabel card = new JLabel(cardDrawn.returnImageIcon());
+			humanHandPanel.add(card);
+			validate();
+			repaint();
+		}
 
 	}
 
