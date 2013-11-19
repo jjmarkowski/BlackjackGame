@@ -40,6 +40,10 @@ public class GameApplet extends Applet implements ActionListener {
 
 		//Human cards/panel
 		humanHandPanel.setLayout(new FlowLayout());
+		JLabel playerTag = new JLabel("Player");
+		playerTag.setFont(new Font("sansserif", Font.BOLD, 32));
+		humanHandPanel.add(playerTag);
+
 		Card cardDrawn = deck.drawCard();
 		player[0].addCard(cardDrawn);
 		JLabel card1 = new JLabel(cardDrawn.returnImageIcon());
@@ -50,10 +54,15 @@ public class GameApplet extends Applet implements ActionListener {
 		JLabel card2 = new JLabel(cardDrawn.returnImageIcon());
 		humanHandPanel.add(card2);
 
+
 		this.add(humanHandPanel);
 
 		//Dealer cards/panel
 		dealerHandPanel.setLayout(new FlowLayout());
+		JLabel dealerTag = new JLabel("Dealer");
+		dealerTag.setFont(new Font("sansserif", Font.BOLD, 32));
+		dealerHandPanel.add(dealerTag);
+
 		cardDrawn = deck.drawCard();
 		player[1].addCard(cardDrawn);
 		card1 = new JLabel(cardDrawn.returnImageIcon());
@@ -61,8 +70,9 @@ public class GameApplet extends Applet implements ActionListener {
 
 		cardDrawn = deck.drawCard();
 		player[1].addCard(cardDrawn);
-		ImageIcon back  = new ImageIcon("images" + File.separator + "back-red.png");
-		card2 = new JLabel(back);
+		//ImageIcon back  = new ImageIcon("images" + File.separator + "back-red.png");
+		//card2 = new JLabel(back);
+		card2 = new JLabel(cardDrawn.returnImageIcon());
 		dealerHandPanel.add(card2);
 
 		this.add(dealerHandPanel);
@@ -93,10 +103,18 @@ public class GameApplet extends Applet implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Stay")) {
-			System.out.println("Stay");
-			repaint();
-		} else if (e.getActionCommand().equals("Hit")) {
+			//card = new JLabel(cardDrawn.returnImageIcon());
+			while (player[1].handValue() < 17) {
+				Card cardDrawn = deck.drawCard();
+				player[1].addCard(cardDrawn);
+				JLabel card = new JLabel(cardDrawn.returnImageIcon());
+				dealerHandPanel.add(card);
+				validate();
+				repaint();
+			}
+		} else if (e.getActionCommand().equals("Hit") && player[0].handValue() < 21) {
 			Card cardDrawn = deck.drawCard();
+			player[0].addCard(cardDrawn);
 
 			JLabel card = new JLabel(cardDrawn.returnImageIcon());
 			humanHandPanel.add(card);
