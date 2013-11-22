@@ -14,8 +14,8 @@ public class GameApplet extends Applet implements ActionListener {
 	private JButton stayButton = new JButton("Stay");
 	private JButton hitButton = new JButton("Hit");
 
-	private JPanel humanHandPanel = new JPanel();
-	private JPanel dealerHandPanel = new JPanel();
+	// private JPanel humanHandPanel = new JPanel();
+	// private JPanel dealerHandPanel = new JPanel();
 
 	private Player[] player = new Player[2];
 
@@ -43,22 +43,6 @@ public class GameApplet extends Applet implements ActionListener {
 		Card cardDrawn2 = deck.drawCard();
 		player[0] = new Human(200.0, cardDrawn1, cardDrawn2);
 		this.add(player[0].getPanel());
-		// humanHandPanel.setLayout(new FlowLayout());
-		// JLabel playerTag = new JLabel("Player");
-		// playerTag.setFont(new Font("sansserif", Font.BOLD, 32));
-		// humanHandPanel.add(playerTag);
-
-		// Card cardDrawn = deck.drawCard();
-		// player[0].addCard(cardDrawn);
-		// JLabel card1 = new JLabel(cardDrawn.returnImageIcon());
-		// humanHandPanel.add(card1);
-
-		// cardDrawn = deck.drawCard();
-		// player[0].addCard(cardDrawn);
-		// JLabel card2 = new JLabel(cardDrawn.returnImageIcon());
-		// humanHandPanel.add(card2);
-
-		// this.add(humanHandPanel);
 
 		//Dealer cards/panel
 		// dealerHandPanel.setLayout(new FlowLayout());
