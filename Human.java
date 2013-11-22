@@ -21,6 +21,6 @@ public class Human extends Player {
 	}
 
 	public double getBalance() {
-		return this.balance;
+		return balance;
 	}
 }

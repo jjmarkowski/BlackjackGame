@@ -10,103 +10,134 @@ import javax.imageio.ImageIO;
 public class GameApplet extends Applet implements ActionListener {
 
 	private Deck deck;
-	private JPanel playerInterationPanel = new JPanel();
+
+	private JPanel playerInteractionPanel = new JPanel();
 	private JButton stayButton = new JButton("Stay");
 	private JButton hitButton = new JButton("Hit");
+	private JButton newGameButton = new JButton("New Game");
+	private JButton newHandButton = new JButton("New Hand");
 
-	private JPanel humanHandPanel = new JPanel();
-	private JPanel dealerHandPanel = new JPanel();
+	private JPanel betPanel = new JPanel();
+	private JLabel balanceLabel = new JLabel("");
+	private JLabel betLabel = new JLabel("");
+	private JButton betButton5 = new JButton("$5");
+	private JButton betButton10 = new JButton("$10");
+	private JButton betButton50 = new JButton("$50");
+	private JButton betButton100 = new JButton("$100"); 
 
 	private Player[] player = new Player[2];
 
 	public void init() {
 
-		deck = new Deck();
-		//player[0] = new Human(200.0);
-		//player[1] = new Dealer();
-
 		this.setLayout(new GridLayout(0, 1));
 
 		//button set up
-		playerInterationPanel.setLayout(new FlowLayout());
+		playerInteractionPanel.setLayout(new FlowLayout());
 		stayButton.addActionListener(this);
 		stayButton.setActionCommand("Stay");
-		playerInterationPanel.add(stayButton);
+		playerInteractionPanel.add(stayButton);
+
 		hitButton.addActionListener(this);
 		hitButton.setActionCommand("Hit");
-		playerInterationPanel.add(hitButton);
+		playerInteractionPanel.add(hitButton);
 
-		this.add(playerInterationPanel);
+		newGameButton.addActionListener(this);
+		newGameButton.setActionCommand("New Game");
+		playerInteractionPanel.add(newGameButton);
 
-		//Human cards/panel
-		Card cardDrawn1 = deck.drawCard();
-		Card cardDrawn2 = deck.drawCard();
+		newHandButton.addActionListener(this);
+		newHandButton.setActionCommand("New Hand");
+		playerInteractionPanel.add(newHandButton);
+
+		this.add(playerInteractionPanel);
+
+		Card cardDrawn1 = new Card();
+		Card cardDrawn2 = new Card();
 		player[0] = new Human(200.0, cardDrawn1, cardDrawn2);
-		this.add(player[0].getPanel());
-		// humanHandPanel.setLayout(new FlowLayout());
-		// JLabel playerTag = new JLabel("Player");
-		// playerTag.setFont(new Font("sansserif", Font.BOLD, 32));
-		// humanHandPanel.add(playerTag);
-
-		// Card cardDrawn = deck.drawCard();
-		// player[0].addCard(cardDrawn);
-		// JLabel card1 = new JLabel(cardDrawn.returnImageIcon());
-		// humanHandPanel.add(card1);
-
-		// cardDrawn = deck.drawCard();
-		// player[0].addCard(cardDrawn);
-		// JLabel card2 = new JLabel(cardDrawn.returnImageIcon());
-		// humanHandPanel.add(card2);
-
-		// this.add(humanHandPanel);
-
-		//Dealer cards/panel
-		// dealerHandPanel.setLayout(new FlowLayout());
-		// JLabel dealerTag = new JLabel("Dealer");
-		// dealerTag.setFont(new Font("sansserif", Font.BOLD, 32));
-		// dealerHandPanel.add(dealerTag);
-
-		// cardDrawn = deck.drawCard();
-		// player[1].addCard(cardDrawn);
-		// card1 = new JLabel(cardDrawn.returnImageIcon());
-		// dealerHandPanel.add(card1);
-
-		// cardDrawn = deck.drawCard();
-		// player[1].addCard(cardDrawn);
-		// //ImageIcon back  = new ImageIcon("images" + File.separator + "back-red.png");
-		// //card2 = new JLabel(back);
-		// card2 = new JLabel(cardDrawn.returnImageIcon());
-		// dealerHandPanel.add(card2);
-
-		// this.add(dealerHandPanel);
-
+		player[1] = new Dealer(cardDrawn1, cardDrawn2);
+		
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
-
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// if (e.getActionCommand().equals("Stay")) {
-		// 	//card = new JLabel(cardDrawn.returnImageIcon());
-		// 	while (player[1].handValue() < 17) {
-		// 		Card cardDrawn = deck.drawCard();
-		// 		player[1].addCard(cardDrawn);
-		// 		JLabel card = new JLabel(cardDrawn.returnImageIcon());
-		// 		dealerHandPanel.add(card);
-		// 		validate();
-		// 		repaint();
-		// 	}
-		// } else if (e.getActionCommand().equals("Hit") && player[0].handValue() < 21) {
-		// 	Card cardDrawn = deck.drawCard();
-		// 	player[0].addCard(cardDrawn);
+		if ("Stay".equals(e.getActionCommand())) {
+			//this.remove(player[1].getPanel());
+			player[1].flipCard();
+			this.add(player[1].getPanel());
+			this.add(betPanel);
+			validate();
+			repaint();
 
-		// 	JLabel card = new JLabel(cardDrawn.returnImageIcon());
-		// 	humanHandPanel.add(card);
-		// 	validate();
-		// 	repaint();
-		// }
+			while (player[1].handValue() < 17) {
+				Card cardDrawn = deck.drawCard();
+				player[1].addCard(cardDrawn);
+				this.add(player[1].getPanel());
+				this.add(betPanel);
+				validate();
+				repaint();
+			}
+
+		} else if ("Hit".equals(e.getActionCommand()) && player[0].handValue() < 21) {
+			Card cardDrawn = deck.drawCard();
+			player[0].addCard(cardDrawn);
+			this.add(player[0].getPanel());
+			this.add(player[1].getPanel());
+			this.add(betPanel);
+			validate();
+			repaint();
+
+		} else if ("New Hand".equals(e.getActionCommand())) {
+			
+		
+
+		} else if ("New Game".equals(e.getActionCommand())) {
+
+			deck = new Deck();
+
+			this.remove(player[0].getPanel());
+			this.remove(player[1].getPanel());
+			this.remove(betPanel);
+			betPanel.remove(balanceLabel);
+			//betPanel.remove(balanceLabel);
+
+			//Human cards/panel
+			Card cardDrawn1 = deck.drawCard();
+			Card cardDrawn2 = deck.drawCard();
+			player[0] = new Human(200.0, cardDrawn1, cardDrawn2);
+			this.add(player[0].getPanel());
+		
+			//Dealer cards/panel
+			cardDrawn1 = deck.drawCard();
+			cardDrawn2 = deck.drawCard();
+			player[1] = new Dealer(cardDrawn1, cardDrawn2);
+			this.add(player[1].getPanel());
+
+			//betting panels
+			balanceLabel = new JLabel("Current Balance: $200");
+			betPanel.add(balanceLabel);
+			betButton5.addActionListener(this);
+			betButton5.setActionCommand("$5");
+			betPanel.add(betButton5);
+			betButton10.addActionListener(this);
+			betButton10.setActionCommand("$10");
+			betPanel.add(betButton10);
+			betButton50.addActionListener(this);
+			betButton50.setActionCommand("$50");
+			betPanel.add(betButton50);
+			betButton100.addActionListener(this);
+			betButton100.setActionCommand("$100");
+			betPanel.add(betButton100);
+			this.add(betPanel);
+
+			validate();
+			repaint();
+
+		} else if ("$5".equals(e.getActionCommand())) {
+			player[0].bet(5.0);
+		}
 
 	}
 
