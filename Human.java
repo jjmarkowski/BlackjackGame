@@ -3,15 +3,22 @@ public class Human {
 	private Hand hand;
 	private PlayerPanel panel;
 	private double balance;
-	private double bet;
+	private double betTotal;
 	
-	public Human(double balance, Card cardDrawn1, Card cardDrawn2) {
+	public Human(double newBalance, Card cardDrawn1, Card cardDrawn2) {
 		hand = new Hand();
 		hand.addCard(cardDrawn1);
 		hand.addCard(cardDrawn2);
 		panel = new PlayerPanel(cardDrawn1, cardDrawn2);
-		balance = balance;
-		bet = 0;
+		this.balance = newBalance;
+		betTotal = 0;
+	}
+
+	public void newHand(Card cardDrawn1, Card cardDrawn2) {
+		hand = new Hand();
+		hand.addCard(cardDrawn1);
+		hand.addCard(cardDrawn2);
+		panel = new PlayerPanel(cardDrawn1, cardDrawn2);
 	}
 
 	public void addCard(Card cardDrawn) {
@@ -28,19 +35,21 @@ public class Human {
 	}
 
 	public void bet(double betAmount) {
-		bet += betAmount;
+		betTotal += betAmount;
 		balance -= betAmount;
 	}
 
-	public double betAmount() {
-		return bet;
+	public double getBetTotal() {
+		return betTotal;
 	}
 
 	public void betReturn(int x) {
-		if (x==1) {
-			balance += (bet * 2);
+		if (x == 1) {
+			balance += (betTotal * 2);
+		} else if (x == 2) {
+			balance += betTotal;
 		}
-		bet = 0;
+		betTotal = 0;
 	}
 
 	public double getBalance() {

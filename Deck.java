@@ -1,3 +1,4 @@
+//No longer in use
 import java.util.Random;
 
 public class Deck {
@@ -45,6 +46,10 @@ public class Deck {
 	public Card drawCard() {
 		positionInDeck++;
 		return deck[positionInDeck-1];
+	}
+
+	public int getPositionInDeck() {
+		return positionInDeck;
 	}
 
 	public void printDeck() {

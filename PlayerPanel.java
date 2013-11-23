@@ -37,8 +37,6 @@ public class PlayerPanel extends JPanel {
 		ImageIcon back  = new ImageIcon("images" + File.separator + "back-red.png");
 		card2 = new JLabel(back);
 		this.add(card2);
-
-		//this.remove(card1);
 	}
 
 	public void addCard(Card cardDrawn) {
