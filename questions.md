@@ -8,4 +8,4 @@ BlackjackGame
 6. Inheritance is taking behaviors and states from a particular class to be used in a subclass.  This allows for superclasses to be used to create an unlimited amount of subclasses that have similar information.
 7. "Super" allows a subclass to run a method of a superclass. "This" allows a particular instance to call the constructor in another class.
 8. The two properties of objects is the behavior and the state.
-9. I am still confused a little bit about superclass and subclasses.
+9. I am still confused a little bit about how superclasses and subclasses interact.
