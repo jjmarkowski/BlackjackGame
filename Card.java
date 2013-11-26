@@ -34,6 +34,7 @@ public class Card {
 		this.suit = suit;
 	}
 
+	//changes the number value that represents each card into the correct number of letter in order for the image to be loaded later on
 	public void setName() {
 		if (number == 1) {
 			this.name = "A" + suit + "s";
@@ -76,6 +77,7 @@ public class Card {
 		return name;
 	}
 
+	//loads the image for a particular card
 	public Image loadImage(String name) {
 		String path = null;
 		Image image = null;
@@ -92,6 +94,7 @@ public class Card {
 		return image;
 	}
 
+	//turns the .png into an ImageIcon in order for it to work with the panels
 	public ImageIcon returnImageIcon() {
 		return new ImageIcon("images" + File.separator + this.name + ".png");
 	}

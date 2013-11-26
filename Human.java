@@ -34,6 +34,7 @@ public class Human {
 		return panel;
 	}
 
+	//evey bet adds to the betAmount and takes away from the balance
 	public void bet(double betAmount) {
 		betTotal += betAmount;
 		balance -= betAmount;
@@ -43,6 +44,7 @@ public class Human {
 		return betTotal;
 	}
 
+	//x = 1 when the player won giving them their bet, x =2 when it was a draw in order to just give what the player bet back
 	public void betReturn(int x) {
 		if (x == 1) {
 			balance += (betTotal * 2);

@@ -1,3 +1,4 @@
+//no longer being used
 import java.awt.*;
 import java.awt.event.*;
 import java.applet.*;
@@ -36,7 +37,7 @@ public class GameApplet extends Applet implements ActionListener {
 
 		this.setLayout(new GridLayout(0, 1));
 
-		//button set up
+		//creates all actionListener and actionCommands for all possible buttons
 		playerInteractionPanel.setLayout(new FlowLayout());
 		stayButton.addActionListener(this);
 		stayButton.setActionCommand("Stay");
@@ -80,6 +81,7 @@ public class GameApplet extends Applet implements ActionListener {
 		if ("Stay".equals(e.getActionCommand())) {
 			dealer.flipCard();
 
+			//draws cards for the dealer until their hand value is above 17
 			while (dealer.handValue() < 17) {
 				Card cardDrawn = deck.drawCard();
 				dealer.addCard(cardDrawn);

@@ -12,11 +12,6 @@ public class Deck {
 		shuffleDeck();
 	}
 
-	public Deck(String x) {
-		deck = new Card[52];
-		setDeck();
-	}
-
 	//creates a deck with cards in order
 	//1 = Ace: 11,12,13 = Face cards
 	public void setDeck() {
@@ -48,6 +43,7 @@ public class Deck {
 		return deck[positionInDeck-1];
 	}
 
+	//returns the number of cards that have been drawn
 	public int getPositionInDeck() {
 		return positionInDeck;
 	}

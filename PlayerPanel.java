@@ -10,6 +10,7 @@ public class PlayerPanel extends JPanel {
 
 	private JLabel card2;
 
+	//basic card panel where both cards are face up
 	public PlayerPanel(Card cardDrawn1, Card cardDrawn2) {
 		super();
 
@@ -24,6 +25,7 @@ public class PlayerPanel extends JPanel {
 		this.add(card2);
 	}
 
+	//card panel for the dealer's inital hand, one card up and one card face down
 	public PlayerPanel(Card cardDrawn1) {
 		super();
 
@@ -39,11 +41,13 @@ public class PlayerPanel extends JPanel {
 		this.add(card2);
 	}
 
+	//adds a card to the panel
 	public void addCard(Card cardDrawn) {
 		JLabel card = new JLabel(cardDrawn.returnImageIcon());
 		this.add(card);
 	}
 
+	//flips the card of the dealer that was face down
 	public void flipCard(Card cardDrawn) {
 		this.remove(card2);
 		card2 = new JLabel(cardDrawn.returnImageIcon());
